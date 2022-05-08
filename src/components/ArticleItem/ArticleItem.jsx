@@ -1,5 +1,4 @@
-
-import styles from "./ArticleItem.module.scss";
+import { Item, Picture, Date, Title, Text, More } from "./ArticleItem.styled";
 
 export const ArticleItem = ({
   webformatURL,
@@ -9,17 +8,16 @@ export const ArticleItem = ({
   text,
   onImageClick,
 }) => (
-  <li className={styles.articleItem}>
-    <img
+  <Item>
+    <Picture
       src={webformatURL}
       alt={tags}
-      className={styles.articlePicture}
     />
-    <span className={styles.articleDate}>{date}</span>
-    <h2 className={styles.articleTitle}>{title}</h2>
-    <p className={styles.articleText}>{text}</p>
-    <a
+    <Date>{date}</Date>
+    <Title>{title}</Title>
+    <Text>{text}</Text>
+    <More
       href="article.html"
-      className={styles.more}>Read more </a>
-  </li>
+    >Read more </More>
+  </Item>
 );

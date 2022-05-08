@@ -1,8 +1,8 @@
-import styles from "./CountResults.module.scss";
+import { Container, Results, Line } from "./CountResults.styled";
 
 export const CountResults = () => (
-  <div className={styles.countContainer}>
-    <p className={styles.countResults}>Results: 6</p>
-      <div className={styles.line}></div>
-  </div>
+  <Container>
+    <Results>Results: 6</Results>
+      <Line></Line>
+  </Container>
 )

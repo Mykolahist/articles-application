@@ -1,9 +1,9 @@
 import { ArticleItem } from "components/ArticleItem/ArticleItem";
 
-import styles from "./ArticleList.module.scss";
+import { List } from "./ArticleList.styled";
 
 export const ArticleList = ({ articles, onArticleClick }) => (
-  <ul className={styles.articleList}>
+  <List>
     {articles.map(({ id, webformatURL, tags }) => (
       <ArticleItem
         key={String(id)}
@@ -12,5 +12,5 @@ export const ArticleList = ({ articles, onArticleClick }) => (
         onArticleClick={onArticleClick}
       />
     ))}
-  </ul>
+  </List>
 );

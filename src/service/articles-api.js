@@ -6,6 +6,8 @@ const BASE_URL = 'https://newsapi.org/v2/everything';
 // https://newsapi.org/v2/everything?q=tesla&from=2021-11-30&sortBy=publishedAt&apiKey=1622b6facfbd4a9b9bfc76365197ced1
 // https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=1622b6facfbd4a9b9bfc76365197ced1
 
+// http://api.spaceflightnewsapi.net/v3
+
 export default function fetchArticles ({ searchQuery = '', currentPage = 1, pageSize = 6 }) {
   const searchParams = new URLSearchParams({
     q: searchQuery,
@@ -15,6 +17,6 @@ export default function fetchArticles ({ searchQuery = '', currentPage = 1, page
   });
 
   return axios.get(`${BASE_URL}?${searchParams}`).then(response => {
-    return response.data.hits;
+    return response.data.articles;
   });
 };

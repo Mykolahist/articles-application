@@ -1,6 +1,12 @@
 import { Component } from "react";
+import { Icons } from "../Icons/Icons";
 
-import styles from "./Searchbar.module.scss";
+import {
+  Form,
+  Label,
+  Input,
+  Button
+} from "./Searchbar.styled";
 
 export class Searchbar extends Component {
   state = {
@@ -24,21 +30,26 @@ export class Searchbar extends Component {
     const { query } = this.state;
     
     return (
-      <form className={styles.searchForm}>
-        <div className={styles.formInput} onSubmit={this.handleSubmit}>
-          <label className={styles.label}>Filter by keywords</label>
-          <input
-            className={styles.input}
-            type="text"
-            name="query"
-            autocomplete="off"
-            placeholder="The most successful IT companies in 2020"
-            value={query}
-            onChange={this.handleChange}
+      <Form
+        onSubmit={this.handleSubmit}
+      >
+        <Label>Filter by keywords</Label>
+        <Input
+          type="text"
+          name="query"
+          autoComplete="off"
+          placeholder="The most successful IT companies in 2020"
+          value={query}
+          onChange={this.handleChange}
+        />
+        <Button type="submit">
+          <Icons
+            name="search"
+            width="20px"
+            height="20px"
           />
-        </div>
-        <button type="submit" className={styles.searchBtn}></button>
-      </form>
+        </Button>
+      </Form>
     );
   };
 };

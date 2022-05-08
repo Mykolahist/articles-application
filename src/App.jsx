@@ -1,6 +1,6 @@
 import { Component } from "react";
 
-import { Container } from "components/Container/Container";
+import { ArticlesBoard } from "components/ArticlesBoard/ArticlesBoard";
 import { Searchbar } from "components/Searchbar/Searchbar";
 import { CountResults } from "components/CountResults/CountResults";
 import { ArticleList } from "components/ArticleList/ArticleList";
@@ -73,7 +73,7 @@ export class App extends Component {
 
 
     return (
-      <Container>
+      <ArticlesBoard>
         <Searchbar onSubmit={this.onChangeQuery} />
         <CountResults />
         <ArticleList articles={articles} onArticleClick={this.showSelectedArticle} />
@@ -86,7 +86,7 @@ export class App extends Component {
             onClose={this.toggleModal}
           />
         )} */}
-      </Container>
+      </ArticlesBoard>
     );
   };
 };
