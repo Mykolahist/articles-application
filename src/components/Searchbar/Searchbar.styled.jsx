@@ -41,14 +41,15 @@ export const Input = styled.input`
 export const Button = styled.button`
   position: absolute;
   top: 34px;
-  left: 1px;
+  left: 2px;
   padding: 0;
 
-  width: 60px;
+  width: 55px;
   height: 44px;
 
   background-color: ${props => props.theme.colors.white};
   border: ${props => `1px solid ${props.theme.colors.white}`};
+  border-radius: 5px;
 
   cursor: pointer;
 `;

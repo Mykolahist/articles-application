@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { useState } from "react";
 import { Icons } from "../Icons/Icons";
 
 import {
@@ -8,48 +8,42 @@ import {
   Button
 } from "./Searchbar.styled";
 
-export class Searchbar extends Component {
-  state = {
-    query: '',
+export const Searchbar = () => {
+  const [query, setQuery] = useState("");
+
+  const handleChange = e => {
+    setQuery(e.currentTarget.value);
   };
 
-  handleChange = e => {
-    this.setState({
-      query: e.currentTarget.value,
-    });
-  };
-
-  handleSubmit = e => {
+  const handleSubmit = e => {
     e.preventDefault();
-
-    this.props.onSubmit(this.state.query);
-    this.setState({ query: '' });
+    reset();
   };
 
-  render() {
-    const { query } = this.state;
-    
-    return (
-      <Form
-        onSubmit={this.handleSubmit}
-      >
-        <Label>Filter by keywords</Label>
-        <Input
-          type="text"
-          name="query"
-          autoComplete="off"
-          placeholder="The most successful IT companies in 2020"
-          value={query}
-          onChange={this.handleChange}
+  const reset = () => {
+    setQuery("");
+  };
+
+  return (
+    <Form
+      onSubmit={handleSubmit}
+    >
+      <Label>Filter by keywords</Label>
+      <Input
+        type="text"
+        name="query"
+        autoComplete="off"
+        placeholder="Search news about spaceflights"
+        value={query}
+        onChange={handleChange}
+      />
+      <Button type="submit">
+        <Icons
+          name="search"
+          width="20px"
+          height="20px"
         />
-        <Button type="submit">
-          <Icons
-            name="search"
-            width="20px"
-            height="20px"
-          />
-        </Button>
-      </Form>
-    );
-  };
+      </Button>
+    </Form>
+  );
 };

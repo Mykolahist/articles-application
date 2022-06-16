@@ -1,23 +1,21 @@
 import { Item, Picture, Date, Title, Text, More } from "./ArticleItem.styled";
 
 export const ArticleItem = ({
-  webformatURL,
-  tags,
-  date,
+  imageUrl,
+  publishedAt,
   title,
-  text,
-  onImageClick,
+  summary
 }) => (
   <Item>
     <Picture
-      src={webformatURL}
-      alt={tags}
+      src={imageUrl}
+      alt={title}
     />
-    <Date>{date}</Date>
+    <Date>{publishedAt}</Date>
     <Title>{title}</Title>
-    <Text>{text}</Text>
+    <Text>{summary}</Text>
     <More
-      href="article.html"
+      href="/"
     >Read more </More>
   </Item>
 );

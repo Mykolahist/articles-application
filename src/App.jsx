@@ -1,92 +1,42 @@
-import { Component } from "react";
+import axios from "axios";
+import { useState, useEffect } from "react";
 
 import { ArticlesBoard } from "components/ArticlesBoard/ArticlesBoard";
 import { Searchbar } from "components/Searchbar/Searchbar";
 import { CountResults } from "components/CountResults/CountResults";
 import { ArticleList } from "components/ArticleList/ArticleList";
+import { ArticleItem } from "components/ArticleItem/ArticleItem";
 
-import api from './service/articles-api';
+import { ALL_ARTICLES } from "service/articles-api";
 
-export class App extends Component {
+export const App = () => {
+  const [articles, setArticles] = useState([]);
 
-  state = {
-    articles: [],
-    currentPage: 1,
-    searchQuery: '',
-  };
+  console.log(articles);
+  useEffect(() => {
+    axios.get(ALL_ARTICLES).then(
+      ({ data }) => setArticles(data)
+    )
+  }, []);
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.searchQuery !== this.state.searchQuery) {
-      this.fetchImages();
-    }
+  return (
+    <ArticlesBoard>
+      <Searchbar />
+      <CountResults />
+      <ArticleList>
+        {articles.map((a) => {
+            const articleInfo = {
+              imageUrl: a.imageUrl,
+              title: a.title,
+              publishedAt: a.publishedAt,
+              summary: a.summary
+            };
 
-    this.scrollToBottom();
-  };
-
-  onChangeQuery = query => {
-    this.setState({
-      searchQuery: query,
-      articles: [],
-      currentPage: 1,
-      error: null,
-    });
-  };
-
-  fetchArticles = () => {
-    const { currentPage, searchQuery } = this.state;
-    const options = { currentPage, searchQuery };
-
-    this.setState({ isLoading: true });
-
-    api
-      .fetchArticles(options)
-      .then(articles => {
-        this.setState(prevState => ({
-          articles: [...prevState.articles, ...articles],
-          currentPage: prevState.currentPage + 1,
-        }));
-      })
-      .catch(error => this.setState({ error }))
-      .finally(() => this.setState({ isLoading: false }));
-  };
-
-  toggleModal = () => {
-    this.setState(({ showModal }) => ({
-      showModal: !showModal,
-    }));
-  };
-
-  showSelectedArticle = (url, alt) => {
-    this.setState({
-      largeImageUrl: url,
-      description: alt,
-    });
-
-    this.toggleModal();
-  };
-
-  render() {
-    const { articles } =
-      this.state;
-
-    // const renderButton = articles.length > 0 && !isLoading;
-
-
-    return (
-      <ArticlesBoard>
-        <Searchbar onSubmit={this.onChangeQuery} />
-        <CountResults />
-        <ArticleList articles={articles} onArticleClick={this.showSelectedArticle} />
-        {/* {isLoading && <Loader />} */}
-        {/* {renderButton && <Button onClick={this.fetchArticles} />} */}
-        {/* {showModal && (
-          <Modal
-            url={largeImageUrl}
-            alt={description}
-            onClose={this.toggleModal}
-          />
-        )} */}
-      </ArticlesBoard>
-    );
-  };
+            return (
+              <ArticleItem key={a.title} {...articleInfo} />
+            )
+          })}
+      </ArticleList>
+    </ArticlesBoard>
+  );
 };

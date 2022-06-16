@@ -1,22 +1,5 @@
-import axios from "axios";
+const BASE_URL = "http://api.spaceflightnewsapi.net/v3/";
 
-const API_KEY = '1622b6facfbd4a9b9bfc76365197ced1';
-const BASE_URL = 'https://newsapi.org/v2/everything';
+export const ALL_ARTICLES = BASE_URL + "articles?_limit=9";
 
-// https://newsapi.org/v2/everything?q=tesla&from=2021-11-30&sortBy=publishedAt&apiKey=1622b6facfbd4a9b9bfc76365197ced1
-// https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=1622b6facfbd4a9b9bfc76365197ced1
-
-// http://api.spaceflightnewsapi.net/v3
-
-export default function fetchArticles ({ searchQuery = '', currentPage = 1, pageSize = 6 }) {
-  const searchParams = new URLSearchParams({
-    q: searchQuery,
-    page: currentPage,
-    pageSize: pageSize,
-    key: API_KEY,
-  });
-
-  return axios.get(`${BASE_URL}?${searchParams}`).then(response => {
-    return response.data.articles;
-  });
-};
+export const COUNT = ALL_ARTICLES + "/count";
