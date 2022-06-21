@@ -1,8 +1,14 @@
 import styled from "@emotion/styled";
 
 export const Container = styled.div`
-  min-width: 1440px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 50px 75px 63px;
+  margin: 0, auto;
+  padding: 20px 20px;
+
+  @media (min-width: 768px) {
+    padding: 40px 40px 52px;
+  }
+
+  @media (min-width: 1280px) {
+    padding: 50px 75px 63px;
+  }
 `;

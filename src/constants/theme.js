@@ -4,7 +4,7 @@ export const theme = {
     textColor: "#363636",
     lightGray: "#575757",
     black: "#000000",
-    border: "#EAEAEA",
+    border: "#EAEAEA"
   },
   fontFamily: "Montserrat",
 };

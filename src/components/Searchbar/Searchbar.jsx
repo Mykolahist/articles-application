@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { Icons } from "../Icons/Icons";
+import { theme } from "constants/theme";
+
+import { FiSearch } from "react-icons/fi";
 
 import {
   Form,
@@ -38,10 +40,12 @@ export const Searchbar = () => {
         onChange={handleChange}
       />
       <Button type="submit">
-        <Icons
-          name="search"
-          width="20px"
-          height="20px"
+        <FiSearch
+          style={{
+            width: "20px",
+            height: "20px",
+            color: `${theme.colors.lightGray}`
+          }}
         />
       </Button>
     </Form>

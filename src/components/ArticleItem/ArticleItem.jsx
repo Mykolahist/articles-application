@@ -1,4 +1,8 @@
-import { Item, Picture, Date, Title, Text, More } from "./ArticleItem.styled";
+import { Item, Picture, DateWraper, Date, Title, Text, More } from "./ArticleItem.styled";
+
+import { FiCalendar } from "react-icons/fi";
+import { MdArrowForward } from "react-icons/md";
+import { theme } from "constants/theme";
 
 export const ArticleItem = ({
   imageUrl,
@@ -11,11 +15,35 @@ export const ArticleItem = ({
       src={imageUrl}
       alt={title}
     />
-    <Date>{publishedAt}</Date>
+    <DateWraper>
+      <FiCalendar
+        style={{
+          width: "20px",
+          height: "16px",
+          marginRight: "8px",
+          color: `${theme.colors.textColor}`,
+          opacity: 0.6
+        }}               
+      />
+      <Date>      
+        {publishedAt}
+      </Date>
+    </DateWraper>
     <Title>{title}</Title>
     <Text>{summary}</Text>
-    <More
+    <More      
       href="/"
-    >Read more </More>
+    >
+      <span style={{ marginRight: "6px", color: `${theme.colors.textColor}` }}>
+        Read more
+      </span>
+      <MdArrowForward
+        style={{
+          width: "20px",
+          height: "20px",
+          color: `${theme.colors.textColor}` 
+        }}
+      />
+    </More>
   </Item>
 );
