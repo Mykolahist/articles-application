@@ -1,23 +1,43 @@
-import { Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import axios from "axios";
+import format from "date-fns/format";
+import { useState, useEffect } from "react";
+import { ALL_ARTICLES } from "service/articles-api";
 
 import { ArticlesBoard } from "components/ArticlesBoard/ArticlesBoard";
-
-import { HomePage } from "pages/HomePage";
-import { NotFound } from "pages/NotFound";
+import { Searchbar } from "components/Searchbar/Searchbar";
+import { CountResults } from "components/CountResults/CountResults";
+import { ArticleList } from "components/ArticleList/ArticleList";
+import { ArticleItem } from "components/ArticleItem/ArticleItem";
 
 export const App = () => {
   const [articles, setArticles] = useState([]);
   
+  useEffect(() => {
+    axios.get(ALL_ARTICLES).then(
+      ({ data }) => setArticles(data)
+    )
+  }, []);
+
   return (
     <ArticlesBoard>
-      <Routes>
-        <Route index element={<HomePage
-          articles={articles}
-          setArticles={setArticles}
-        />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <Searchbar />
+      <CountResults />
+      <ArticleList>
+        {articles.map((a) => {
+          const formatDating = format(Date.parse(a.publishedAt), "MMMM do, yyyy");
+          const articleInfo = {
+            imageUrl: a.imageUrl,
+            title: a.title,
+            publishedAt: formatDating,
+            summary: a.summary,
+            url: a.url
+          };
+
+          return (
+            <ArticleItem key={a.title} {...articleInfo} />
+          )
+        })}
+      </ArticleList>
     </ArticlesBoard>
   );
 };
