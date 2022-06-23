@@ -8,7 +8,8 @@ export const ArticleItem = ({
   imageUrl,
   publishedAt,
   title,
-  summary
+  summary,
+  url
 }) => (
   <Item>
     <Picture
@@ -32,7 +33,7 @@ export const ArticleItem = ({
     <Title>{title}</Title>
     <Text>{summary}</Text>
     <More      
-      href="/"
+      href={url}
     >
       <span style={{ marginRight: "6px", color: `${theme.colors.textColor}` }}>
         Read more
