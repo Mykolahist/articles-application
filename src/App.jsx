@@ -11,6 +11,7 @@ import { ArticleItem } from "components/ArticleItem/ArticleItem";
 
 export const App = () => {
   const [articles, setArticles] = useState([]);
+  const [filteredArticles, setFilteredArticles] = useState(articles);
   
   useEffect(() => {
     axios.get(ALL_ARTICLES).then(
@@ -18,12 +19,29 @@ export const App = () => {
     )
   }, []);
 
+  const handleSearch = (query) => {
+    let data = [...articles];
+
+    if (query) {
+      data = data.filter(a => a.title.toLowerCase().includes(query.toLowerCase()));
+    };
+
+    setFilteredArticles(data);
+  };
+
+  const filteredCount = filteredArticles.length;
+
+  useEffect(() => {
+    handleSearch();
+    // eslint-disable-next-line
+  }, [articles]);
+
   return (
     <ArticlesBoard>
-      <Searchbar />
-      <CountResults />
+      <Searchbar onSearch={handleSearch} />
+      <CountResults filteredCount={filteredCount} />
       <ArticleList>
-        {articles.map((a) => {
+        {filteredArticles.map((a) => {
           const formatDating = format(Date.parse(a.publishedAt), "MMMM do, yyyy");
           const articleInfo = {
             imageUrl: a.imageUrl,

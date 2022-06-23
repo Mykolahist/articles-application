@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { theme } from "constants/theme";
 
 import { FiSearch } from "react-icons/fi";
@@ -10,7 +10,7 @@ import {
   Button
 } from "./Searchbar.styled";
 
-export const Searchbar = () => {
+export const Searchbar = ({onSearch}) => {
   const [query, setQuery] = useState("");
 
   const handleChange = e => {
@@ -25,6 +25,12 @@ export const Searchbar = () => {
   const reset = () => {
     setQuery("");
   };
+
+  useEffect(() => {
+    onSearch(query);
+
+    // eslint-disable-next-line
+  }, [query])
 
   return (
     <Form

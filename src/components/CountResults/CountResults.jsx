@@ -1,10 +1,10 @@
 import { Container, Results, Line } from "./CountResults.styled";
 
-export const CountResults = () => {
+export const CountResults = ({filteredCount}) => {
 
   return (
     <Container>
-      <Results>Results: 9</Results>
+      <Results>Results: {filteredCount}</Results>
       <Line></Line>
     </Container>
   );
