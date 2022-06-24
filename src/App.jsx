@@ -19,7 +19,7 @@ export const App = () => {
     )
   }, []);
 
-  const handleSearch = (query) => {
+  const onSubmit = (query) => {
     let data = [...articles];
 
     if (query) {
@@ -32,13 +32,13 @@ export const App = () => {
   const filteredCount = filteredArticles.length;
 
   useEffect(() => {
-    handleSearch();
+    onSubmit();
     // eslint-disable-next-line
-  }, [articles]);
+  }, []);
 
   return (
     <ArticlesBoard>
-      <Searchbar onSearch={handleSearch} />
+      <Searchbar onSubmit={onSubmit} />
       <CountResults filteredCount={filteredCount} />
       <ArticleList>
         {filteredArticles.map((a) => {
